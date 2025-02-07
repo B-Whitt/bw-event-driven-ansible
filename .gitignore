@@ -2,8 +2,7 @@
 *.pyc
 
 # venv
-venv
-./venv/*
+venv/
 
 # tests
 tests/output
