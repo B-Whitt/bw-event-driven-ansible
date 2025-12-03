@@ -117,6 +117,75 @@
             "description": "Password for SASL PLAIN authentication",
             "type": "string",
             "format": "password"
+        },
+        "message_format": {
+            "title": "Message Format",
+            "description": "The message serialization format. When set to 'json', messages are decoded as JSON (with fallback to raw string). When set to 'avro', messages are deserialized using Apache Avro.",
+            "type": "string",
+            "enum": [
+                "json",
+                "avro"
+            ],
+            "default": "json"
+        },
+        "schema_registry_url": {
+            "title": "Schema Registry URL",
+            "description": "URL of the Confluent Schema Registry for Avro schema lookup. Required when using 'avro' format with Schema Registry. Requires the 'confluent-kafka[schemaregistry]' package.",
+            "type": "string"
+        },
+        "schema_registry_basic_auth": {
+            "title": "Schema Registry Basic Auth",
+            "description": "Basic authentication credentials for Schema Registry. Format is 'username:password'.",
+            "type": "string",
+            "format": "password"
+        },
+        "schema_registry_bearer_token": {
+            "title": "Schema Registry Bearer Token",
+            "description": "Bearer token for Schema Registry authentication. Used for OAuth/OIDC authentication with Confluent Cloud or enterprise SSO. Mutually exclusive with schema_registry_basic_auth.",
+            "type": "string",
+            "format": "password"
+        },
+        "avro_schema_file": {
+            "title": "Avro Schema File",
+            "description": "Path to a local Avro schema file (.avsc) for message deserialization. Used when Schema Registry is not available.",
+            "type": "string"
+        },
+        "schema_registry_oauth_client_id": {
+            "title": "Schema Registry OAuth Client ID",
+            "description": "OAuth client ID for Schema Registry authentication using client credentials grant. Requires confluent-kafka version 2.9.0 or later.",
+            "type": "string"
+        },
+        "schema_registry_oauth_client_secret": {
+            "title": "Schema Registry OAuth Client Secret",
+            "description": "OAuth client secret for Schema Registry authentication.",
+            "type": "string",
+            "format": "password"
+        },
+        "schema_registry_oauth_token_url": {
+            "title": "Schema Registry OAuth Token URL",
+            "description": "OAuth token endpoint URL for obtaining access tokens. Example: https://login.confluent.io/oauth/token",
+            "type": "string"
+        },
+        "schema_registry_oauth_scope": {
+            "title": "Schema Registry OAuth Scope",
+            "description": "OAuth scope for the access token request. Common values include 'schema:read' or space-separated list of scopes.",
+            "type": "string"
+        },
+        "schema_registry_logical_cluster": {
+            "title": "Schema Registry Logical Cluster",
+            "description": "Confluent Cloud logical cluster ID for Schema Registry. Format: lsrc-xxxxx. Required for Confluent Cloud OAuth authentication.",
+            "type": "string"
+        },
+        "schema_registry_identity_pool_id": {
+            "title": "Schema Registry Identity Pool ID",
+            "description": "Confluent Cloud identity pool ID for principal authorization. Format: pool-xxxxx. Required for Confluent Cloud OAuth authentication.",
+            "type": "string"
+        },
+        "schema_registry_ssl": {
+            "title": "Schema Registry SSL",
+            "description": "Whether to apply Kafka SSL settings (cafile, certfile, keyfile) to Schema Registry connections. Set to true when both Kafka and Schema Registry use the same certificates. Set to false when Schema Registry is on an internal network without SSL or uses different certificates.",
+            "type": "boolean",
+            "default": true
         }
     },
     "required": [
